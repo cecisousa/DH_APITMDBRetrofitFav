@@ -17,9 +17,11 @@ import android.widget.ProgressBar;
 
 import com.example.dh_apitmdbretrofitfav.model.pojos.Result;
 import com.example.dh_apitmdbretrofitfav.view.adapters.FilmeRecyclerViewAdapter;
+import com.example.dh_apitmdbretrofitfav.view.interfaces.AddFav;
 import com.example.dh_apitmdbretrofitfav.view.interfaces.OnClick;
 import com.example.dh_apitmdbretrofitfav.viewmodel.HomeFragmentViewModel;
 import com.example.dh_dh_apitmdbretrofitfav.R;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +29,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment implements OnClick {
+public class HomeFragment extends Fragment implements OnClick, AddFav {
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
     private HomeFragmentViewModel viewModel;
@@ -62,6 +64,12 @@ public class HomeFragment extends Fragment implements OnClick {
             }
         });
 
+        viewModel.favoriteAdded.observe(this, result -> {
+            if(result != null){
+                Snackbar.make(recyclerView, result.getTitle() + " adicionado as favoritos", Snackbar.LENGTH_LONG).show();
+            }
+        });
+
         return view;
     }
 
@@ -70,8 +78,7 @@ public class HomeFragment extends Fragment implements OnClick {
         recyclerView = view.findViewById(R.id.recyclerViewFilmes);
         progressBar = view.findViewById(R.id.progressBar);
         viewModel = ViewModelProviders.of(this).get(HomeFragmentViewModel.class);
-        adapter = new FilmeRecyclerViewAdapter(listaResults, this);
-
+        adapter = new FilmeRecyclerViewAdapter(listaResults, this, this);
     }
 
     @Override
@@ -89,5 +96,10 @@ public class HomeFragment extends Fragment implements OnClick {
         transaction.replace(R.id.container, fragment);
         transaction.commit();
 
+    }
+
+    @Override
+    public void addFavoriteClickListener(Result result) {
+        viewModel.salvarFavorito(result);
     }
 }

@@ -10,6 +10,12 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.dh_apitmdbretrofitfav.model.pojos.Result;
 import com.example.dh_apitmdbretrofitfav.model.repository.FilmeRepository;
+import com.example.dh_apitmdbretrofitfav.util.AppUtil;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -20,6 +26,8 @@ import io.reactivex.schedulers.Schedulers;
 public class HomeFragmentViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<Result>> listaFilme = new MutableLiveData<>();
+    public MutableLiveData<Result> favoriteAdded = new MutableLiveData<>();
+    private MutableLiveData<Throwable> resultLiveDataError = new MutableLiveData<>();
     private MutableLiveData<Boolean> loading = new MutableLiveData<>();
     private CompositeDisposable disposable = new CompositeDisposable();
     private FilmeRepository repository = new FilmeRepository();
@@ -49,6 +57,26 @@ public class HomeFragmentViewModel extends AndroidViewModel {
                     Log.i("LOG", "Erro" + throwable.getMessage());
                 })
         );
+    }
+
+    public void salvarFavorito(Result result) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference(AppUtil.getIdUsuario(getApplication()) + "/favorites");
+        String key = reference.push().getKey();
+        reference.child(key).setValue(result);
+
+        reference.child(key).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Result movie = dataSnapshot.getValue(Result.class);
+                favoriteAdded.setValue(movie);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                resultLiveDataError.setValue(databaseError.toException());
+            }
+        });
     }
 
     @Override

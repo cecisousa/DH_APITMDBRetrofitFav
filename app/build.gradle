@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.example.dh_dh_apitmdbretrofitfav"
-        minSdkVersion 15
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -40,6 +40,22 @@ dependencies {
     implementation "android.arch.persistence.room:runtime:1.1.1"
     annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
     implementation "android.arch.persistence.room:rxjava2:1.1.1"
+
+    // Firebase Analytics
+    implementation 'com.google.firebase:firebase-core:17.2.1'
+
+    // Firebase login
+    implementation 'com.google.firebase:firebase-auth:19.1.0'
+    implementation 'com.firebaseui:firebase-ui-auth:4.3.1'
+
+    // Firebase Database
+    implementation 'com.google.firebase:firebase-database:19.2.0'
+
+    // Facebook SDK
+    implementation 'com.facebook.android:facebook-android-sdk:5.9.0'
+
+    // Google login
+    implementation 'com.google.android.gms:play-services-auth:17.0.0'
 
     // ViewModel and LiveData
     def lifecycle_version = "1.1.1"
@@ -80,3 +96,5 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.mediarouter:mediarouter:1.1.0'
 }
+
+apply plugin: 'com.google.gms.google-services'

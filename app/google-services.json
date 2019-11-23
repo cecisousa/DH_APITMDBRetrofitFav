@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "785929871166",
+    "firebase_url": "https://apitmdbretrofitfav.firebaseio.com",
+    "project_id": "apitmdbretrofitfav",
+    "storage_bucket": "apitmdbretrofitfav.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:785929871166:android:9b8a763916006c3b36166f",
+        "android_client_info": {
+          "package_name": "com.example.dh_dh_apitmdbretrofitfav"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "785929871166-ke2an050nk54qqt9j8f73qubfa7jfm9p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dh_dh_apitmdbretrofitfav",
+            "certificate_hash": "0bc02bb9ea3668479492aecf3409ade712d42703"
+          }
+        },
+        {
+          "client_id": "785929871166-qsisr0f65di784rnl491ooa960iivbv4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJYWvt_wW8Gd6lpdN68ozlPyQxGAuUoqU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "785929871166-qsisr0f65di784rnl491ooa960iivbv4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

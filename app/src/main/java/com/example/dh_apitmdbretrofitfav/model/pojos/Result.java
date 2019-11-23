@@ -41,6 +41,10 @@ public class Result implements Parcelable {
     @SerializedName("vote_count")
     private Long voteCount;
 
+    public Result() {
+
+    }
+
     protected Result(Parcel in) {
         byte tmpAdult = in.readByte();
         adult = tmpAdult == 0 ? null : tmpAdult == 1;
